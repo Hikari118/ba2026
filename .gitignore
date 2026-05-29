@@ -3,6 +3,5 @@ node_modules/
 out/
 build/
 .DS_Store
-Thumbs.dbnode_modules/
-.next/
-.DS_Store
+Thumbs.db
+.prompt_history/

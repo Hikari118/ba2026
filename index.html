@@ -25,24 +25,24 @@
     body {
       font-family: 'Inter', sans-serif;
       background: var(--c-bg);
-      min-width: 1440px;
       color: var(--c-dark);
     }
 
-    section, #highlight { scroll-margin-top: 84px; }
+    section, #highlight { scroll-margin-top: 72px; }
 
     /* ── NAV ── */
     .nav {
       position: fixed;
       top: 0; left: 0;
-      width: 100%; height: 84px;
-      background: var(--c-primary);
+      width: 100%; height: 72px;
+      background: var(--c-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       z-index: 1000;
     }
 
     .nav-logo {
       position: absolute;
-      left: 38px; top: 11px;
+      left: 38px; top: 5px;
       width: 161px; height: 62px;
       object-fit: contain;
     }
@@ -59,15 +59,15 @@
       align-items: center;
       justify-content: center;
       width: 110px;
-      height: 84px;
+      height: 72px;
       color: #fff;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
-      letter-spacing: 1.4px;
-      transition: opacity 0.2s;
+      letter-spacing: 1.2px;
+      transition: background 0.2s;
     }
-    .nav-links a:hover { opacity: 0.75; }
+    .nav-links a:hover { background: rgba(255,255,255,0.1); }
 
     /* ── HERO ── */
     .hero {
@@ -79,7 +79,7 @@
 
     .hero-bg {
       position: absolute;
-      top: 84px; left: 0;
+      top: 72px; left: 0;
       width: 100%; height: 816px;
       object-fit: cover;
     }
@@ -444,18 +444,197 @@
       color: #bfeaff;
       line-height: 1.3;
     }
+
+    /* ── BACKDROP ── */
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    .nav-backdrop.open { display: block; }
+
+    .nav-close { display: none; }
+    .nav-close-li { display: none; }
+
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      section, #highlight { scroll-margin-top: 60px; }
+
+      /* NAV */
+      .nav { height: 60px; }
+      .nav-logo {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 8px;
+        width: 110px; height: 44px;
+      }
+      .nav-hamburger { display: flex; }
+
+      /* サイドドロワー */
+      .nav-links {
+        position: fixed;
+        top: 0; left: auto; right: -100%;
+        width: 75%; max-width: 300px;
+        height: 100vh;
+        background: var(--c-dark);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 0;
+        display: flex;
+        visibility: visible; opacity: 1;
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1001;
+        box-shadow: -4px 0 24px rgba(0,0,0,0.3);
+      }
+      .nav-links.open { right: 0; }
+
+      /* 閉じるボタン行 */
+      .nav-close-li {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav-close {
+        display: block;
+        background: none; border: none;
+        color: #fff; font-size: 22px;
+        cursor: pointer; padding: 4px 8px;
+        opacity: 0.8; transition: opacity 0.2s;
+      }
+      .nav-close:hover { opacity: 1; }
+
+      /* リンク行 */
+      .nav-links li { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav-links li:last-child { border-bottom: none; }
+      .nav-links a {
+        width: 100%; height: 56px;
+        padding: 0 24px;
+        justify-content: flex-start;
+        font-size: 15px; letter-spacing: 2px;
+        background: none; transition: background 0.2s;
+      }
+      .nav-links a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+
+      /* HERO */
+      .hero { height: auto; padding-top: 60px; padding-bottom: 16px; display: flex; flex-direction: column; }
+      .hero-bg { position: relative; top: auto; left: auto; width: 100%; height: auto; }
+      .hero-cta {
+        position: relative;
+        top: auto; left: auto;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 16px;
+      }
+
+      /* ABOUT */
+      #about { padding-top: 40px; }
+      .about-inner { margin-left: 0; width: 100%; padding: 0 16px; }
+      .about-title { font-size: 28px; margin-top: 24px; }
+      .about-desc { font-size: 16px; }
+      .overview-cards { flex-direction: column; gap: 16px; margin-top: 32px; }
+      .overview-card { height: auto; }
+
+      /* CONTENTS */
+      #contents { padding-top: 60px; }
+      .contents-inner { margin-left: 0; width: 100%; padding: 0 16px; }
+      .section-heading { font-size: 28px; }
+      .coming-soon-card { height: 240px; margin-top: 20px; }
+      .cs-text { font-size: 28px; }
+
+      /* HIGHLIGHT */
+      #highlight { margin-top: 60px; height: auto; padding: 40px 16px; }
+      .hl-title { font-size: 28px; }
+      .hl-desc { font-size: 16px; }
+
+      /* TIMETABLE */
+      #timetable { padding: 60px 16px 0; }
+      .timetable-inner { width: 100%; }
+      .tt-title { font-size: 28px; }
+
+      /* SPONSOR */
+      #sponser { padding: 40px 0 0; }
+      .sponser-inner { width: 100%; padding: 0 16px; }
+      .sponser-cs-title { font-size: 28px; margin-top: 60px; }
+      .sponser-box { height: 200px; }
+      .sponser-cta-row { margin-top: 32px; justify-content: center; }
+
+      /* ACCESS */
+      #access { padding: 60px 0 60px; }
+      .access-card {
+        width: calc(100% - 32px);
+        margin-left: 16px;
+        height: auto;
+        padding: 32px 24px 24px;
+      }
+      .access-venue-title { font-size: 28px; margin-top: 24px; }
+      .access-venue-addr { font-size: 16px; }
+      .access-routes { font-size: 16px; max-width: 100%; }
+      .access-map {
+        position: relative;
+        right: auto; top: auto;
+        width: 100%; height: 250px;
+        margin-top: 24px;
+      }
+
+      /* FOOTER */
+      footer { height: auto; padding: 40px 16px 32px; }
+      .footer-title { font-size: 28px; }
+      .footer-tagline { font-size: 16px; }
+      .footer-cta-link { margin-top: 32px; }
+      .footer-org {
+        position: relative;
+        top: auto; left: auto;
+        margin-top: 24px;
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav class="nav" role="navigation" aria-label="メインナビゲーション">
+  <nav class="nav" aria-label="メインナビゲーション">
     <a href="index.html">
       <img class="nav-logo"
            src="images/logo.png"
            alt="BOUSAI ACTION 2026" />
     </a>
     <ul class="nav-links">
+      <li class="nav-close-li">
+        <button class="nav-close" aria-label="メニューを閉じる">&#10005;</button>
+      </li>
       <li><a href="#about">ABOUT</a></li>
       <li><a href="#contents">CONTENTS</a></li>
       <li><a href="#timetable">TIMETABLE</a></li>
@@ -463,7 +642,11 @@
       <li><a href="#access">ACCESS</a></li>
       <li><a href="contact.html">CONTACT</a></li>
     </ul>
+    <button class="nav-hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="nav-backdrop"></div>
 
   <!-- HERO -->
   <section class="hero" aria-label="メインビジュアル">
@@ -598,6 +781,34 @@
         window.scrollTo({ top: y, behavior: 'smooth' });
       });
     });
+
+    // Hamburger / drawer menu
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks  = document.querySelector('.nav-links');
+    const backdrop  = document.querySelector('.nav-backdrop');
+    const closeBtn  = document.querySelector('.nav-close');
+
+    function openMenu() {
+      hamburger.classList.add('open');
+      navLinks.classList.add('open');
+      backdrop.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+      backdrop.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () =>
+      hamburger.classList.contains('open') ? closeMenu() : openMenu()
+    );
+    closeBtn.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   </script>
 </body>
 </html>
