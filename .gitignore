@@ -1,0 +1,8 @@
+node_modules/
+.next/
+out/
+build/
+.DS_Store
+Thumbs.dbnode_modules/
+.next/
+.DS_Store

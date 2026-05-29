@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ | BOUSAI ACTION 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-primary:    #0077b6;
+      --c-dark:       #12324a;
+      --c-orange:     #ff9f1c;
+      --c-bg:         #f4faff;
+      --c-light-blue: #e6f4ff;
+      --c-border:     #dbe3ee;
+      --c-input-bg:   #fbfdff;
+      --c-label:      #1f2937;
+      --c-placeholder:#9ea6b2;
+      --c-note:       #6b7280;
+      --c-required:   #e5484d;
+      --c-check-text: #384151;
+      --c-btn-blue:   #1f7ae0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--c-bg);
+      min-width: 1440px;
+      color: var(--c-dark);
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 84px;
+      background: var(--c-primary);
+      z-index: 1000;
+    }
+
+    .nav-logo {
+      position: absolute;
+      left: 38px; top: 11px;
+      width: 161px; height: 62px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      position: absolute;
+      left: 437px; top: 0;
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links a,
+    .nav-links span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 110px;
+      height: 84px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 0.75; }
+    .nav-links .nav-current { opacity: 1; text-decoration: underline; }
+
+    /* ── MAIN ── */
+    main {
+      padding-top: 84px; /* offset for fixed nav */
+    }
+
+    .contact-wrapper {
+      padding: 135px 97px;
+    }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      width: 1271px;
+      background: #fff;
+      border: 1px solid var(--c-border);
+      border-radius: 32px;
+      box-shadow: 0 24px 70px rgba(18, 53, 91, 0.13);
+      padding: 34px 38px 58px;
+    }
+
+    .form-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #12355b;
+      line-height: 1.3;
+    }
+
+    .form-note {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--c-note);
+      line-height: 1.6;
+    }
+
+    /* ── FORM GROUPS ── */
+    .form-group {
+      margin-top: 18px;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--c-label);
+      line-height: 1.3;
+      margin-bottom: 11px;
+    }
+
+    .required-mark {
+      color: var(--c-required);
+      font-weight: 700;
+    }
+
+    .form-input {
+      width: 1184px;
+      height: 54px;
+      background: var(--c-input-bg);
+      border: 1px solid var(--c-border);
+      border-radius: 14px;
+      padding: 0 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--c-label);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input::placeholder {
+      color: var(--c-placeholder);
+    }
+    .form-input:focus {
+      border-color: var(--c-primary);
+      box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.12);
+    }
+
+    /* ── CHECKBOX GROUP ── */
+    .checkbox-group {
+      width: 1184px;
+      background: var(--c-input-bg);
+      border: 1px solid var(--c-border);
+      border-radius: 16px;
+      padding: 20px 20px 20px 20px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--c-check-text);
+      line-height: 1.4;
+      user-select: none;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px; height: 18px;
+      background: #fff;
+      border: 1px solid var(--c-border);
+      border-radius: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .checkbox-item input[type="checkbox"]:checked {
+      background: var(--c-primary);
+      border-color: var(--c-primary);
+    }
+    .checkbox-item input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px; top: 2px;
+      width: 6px; height: 10px;
+      border: 2px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+    .checkbox-item input[type="checkbox"]:focus {
+      outline: 2px solid rgba(0, 119, 182, 0.3);
+      outline-offset: 1px;
+    }
+
+    /* ── TEXTAREA ── */
+    .form-textarea {
+      width: 1184px;
+      height: 110px;
+      background: var(--c-input-bg);
+      border: 1px solid var(--c-border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--c-label);
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-textarea::placeholder {
+      color: var(--c-placeholder);
+    }
+    .form-textarea:focus {
+      border-color: var(--c-primary);
+      box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.12);
+    }
+
+    /* ── SUBMIT ── */
+    .form-submit-row {
+      margin-top: 23px;
+    }
+
+    .btn-submit {
+      width: 1184px;
+      height: 58px;
+      background: var(--c-btn-blue);
+      border: none;
+      border-radius: 16px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-submit:hover  { opacity: 0.88; transform: translateY(-1px); }
+    .btn-submit:active { transform: translateY(0); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--c-dark);
+      height: 341px;
+      position: relative;
+      overflow: hidden;
+      padding: 90px 100px 0;
+    }
+
+    .footer-title {
+      font-size: 42px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .footer-tagline {
+      font-size: 24px;
+      font-weight: 500;
+      color: #ddf3ff;
+      margin-top: 15px;
+      line-height: 1.3;
+    }
+
+    .footer-org {
+      position: absolute;
+      top: 244px; left: 100px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #bfeaff;
+      line-height: 1.3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="メインナビゲーション">
+    <a href="index.html">
+      <img class="nav-logo"
+           src="images/logo.png"
+           alt="BOUSAI ACTION 2026" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">ABOUT</a></li>
+      <li><a href="index.html#contents">CONTENTS</a></li>
+      <li><a href="index.html#timetable">TIMETABLE</a></li>
+      <li><a href="index.html#sponser">SPONSER</a></li>
+      <li><a href="index.html#access">ACCESS</a></li>
+      <li><span class="nav-current" aria-current="page">CONTACT</span></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <div class="contact-wrapper">
+      <div class="form-card">
+        <h1 class="form-title">お問い合わせフォーム</h1>
+        <p class="form-note">必要事項をご入力ください。担当より3営業日以内にご連絡いたします。</p>
+
+        <form action="#" method="post" novalidate>
+
+          <!-- 貴社名 -->
+          <div class="form-group">
+            <label class="form-label" for="company">
+              貴社名 <span class="required-mark">*</span>
+            </label>
+            <input class="form-input" type="text" id="company" name="company"
+                   placeholder="例：株式会社〇〇" required />
+          </div>
+
+          <!-- ご担当者様の氏名 -->
+          <div class="form-group">
+            <label class="form-label" for="name">
+              ご担当者様の氏名 <span class="required-mark">*</span>
+            </label>
+            <input class="form-input" type="text" id="name" name="name"
+                   placeholder="例：山田 太郎" required />
+          </div>
+
+          <!-- ご連絡先メールアドレス -->
+          <div class="form-group">
+            <label class="form-label" for="email">
+              ご連絡先メールアドレス <span class="required-mark">*</span>
+            </label>
+            <input class="form-input" type="email" id="email" name="email"
+                   placeholder="example@company.jp" required />
+          </div>
+
+          <!-- 電話番号 -->
+          <div class="form-group">
+            <label class="form-label" for="phone">
+              電話番号 <span class="required-mark">*</span>
+            </label>
+            <input class="form-input" type="tel" id="phone" name="phone"
+                   placeholder="03-0000-0000" required />
+          </div>
+
+          <!-- 協賛に関するご希望内容 -->
+          <div class="form-group">
+            <p class="form-label">
+              協賛に関するご希望内容 <span class="required-mark">*</span>
+            </p>
+            <div class="checkbox-group" role="group" aria-label="協賛に関するご希望内容">
+              <label class="checkbox-item">
+                <input type="checkbox" name="sponsor_type" value="financial" />
+                金銭協賛
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="sponsor_type" value="goods" />
+                物品協賛（防災用品、ノベルティなど）
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="sponsor_type" value="booth" />
+                ブース出展・PR協力
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" name="sponsor_type" value="other" />
+                その他
+              </label>
+            </div>
+          </div>
+
+          <!-- その他、ご要望・ご相談等 -->
+          <div class="form-group">
+            <label class="form-label" for="message">
+              その他、ご要望・ご相談等
+            </label>
+            <textarea class="form-textarea" id="message" name="message"
+                      placeholder="ご希望内容やご相談事項があればご記入ください。"></textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-submit-row">
+            <button class="btn-submit" type="submit">送信する</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <h2 class="footer-title">BOUSAI ACTION 2026</h2>
+    <p class="footer-tagline">「防災をもっと身近に、もっと楽しく」</p>
+    <p class="footer-org">主催：学生団体 防災me＋デジタルハリウッド大学 グローバルリーダーシップゼミ</p>
+  </footer>
+
+</body>
+</html>
